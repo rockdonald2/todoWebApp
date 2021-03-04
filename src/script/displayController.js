@@ -7,7 +7,7 @@ let displayController = (function () {
 
     const headerSearchBtn = document.querySelector('#headerSearchBtn');
     const searchBar = document.querySelector('.header--form');
-    searchBar.style.top = `${header.clientHeight}px`;
+    searchBar.style.top = `${header.offsetHeight}px`;
     const headerAddTaskBtn = document.querySelector("#headerAddTaskBtn");
     const mainPanelAddTaskBtn = document.querySelector('#mainPanelAddTaskBtn');
     const overlay = document.querySelector('.overlay');
