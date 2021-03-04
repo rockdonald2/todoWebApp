@@ -1,0 +1,28 @@
+{
+  "name": "todoapp",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "watch": "webpack --watch",
+    "devserver": "concurrently \"webpack --watch\" \"node-sass src/main.scss dist/style.css -w\" \"live-server ./dist\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.12.17",
+    "@babel/preset-env": "^7.12.17",
+    "babel-loader": "^8.2.2",
+    "concurrently": "^6.0.0",
+    "live-server": "^1.2.1",
+    "node-sass": "^5.0.0",
+    "webpack": "^5.23.0",
+    "webpack-cli": "^4.5.0"
+  },
+  "dependencies": {
+    "dompurify": "^2.2.6",
+    "marked": "^2.0.1"
+  }
+}

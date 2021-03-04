@@ -1,0 +1,49 @@
+.popup {
+    position: fixed;
+    top: 25px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    transition: all .5s;
+
+    &--instance {
+        width: 35rem;
+        border-radius: 1rem;
+        padding: $size-sm;
+        background-color: $color-white;
+        @include layeredSmoothShadow;
+        @include transition(all);
+        transform: translateY(-100%);
+        opacity: 0;
+
+        &.show {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        &:not(:last-of-type) {
+            margin-bottom: $size-sm;
+        }
+
+        &__title {
+            @include flexCenterize;
+            color: $color-main;
+            margin-bottom: $size-sm;
+
+            h3 {
+                font-size: 2rem;
+            }
+
+            svg {
+                width: $size-md * 1.25;
+                height: $size-md * 1.25;
+                margin-right: $size-sm;
+            }
+        }
+
+        &__msg {
+            font-size: 1.5rem;
+            text-align: center;
+        }
+    }
+}

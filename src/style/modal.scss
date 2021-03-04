@@ -1,0 +1,331 @@
+.modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.85);
+    width: 50rem;
+    background-color: $color-white;
+    border-radius: 2.5rem;
+    z-index: -1;
+    opacity: 0;
+    @include layeredSmoothShadow;
+    @include transition(all);
+
+    @include respond(475px) {
+        width: 40rem;
+    }
+
+    @include respond(400px) {
+        width: 35rem;
+    }
+
+    &.active {
+        z-index: 75;
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+
+    &--field, &--task {
+        margin: $size-md $size-lg;
+        padding: $size-sm;
+
+        @include respond(500px) {
+            margin: $size-sm;
+        }
+
+        &.hidden {
+            display: none;
+        }
+    }
+
+    &--field {
+        text-align: center;
+        font-size: 1.8rem;
+        border: none;
+        color: $color-main;
+    }
+
+    &--title {
+        width: 100%;
+        padding: $size-sm;
+        margin-bottom: $size-sm;
+        border-bottom: 1px solid $color-darkgrey;
+    }
+
+    &--form {
+        &__title, &__note {
+            input[type="text"], textarea {
+                border: none;
+                border-bottom: 2px solid $color-main;
+                border-radius: 5px;
+                padding: $size-md * 1.25 $size-sm $size-sm $size-sm;
+                width: 100%;
+                font-family: inherit;
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        &__title, &__note, &__time, &__category, &__priority {
+            margin-bottom: $size-md;
+            position: relative;
+        }
+
+        &__title {
+            label {
+                position: absolute;
+                left: 10px;
+                top: 50%;
+                font-size: 1.6rem;
+                transform: translateY(-50%);
+                @include transition(all);
+            }
+
+            input[type="text"] {
+                &:focus, &:active, &:valid {
+                    & + label {
+                        top: 12.5px;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+
+            &--error {
+                @include flexCenterize;
+                margin-left: $size-sm;
+                padding-bottom: $size-md;
+                color: #ff4757;
+                opacity: 1;
+                @include transition(opacity);
+                height: initial;
+
+                svg {
+                    width: $size-sm * 1.5;
+                    height: $size-sm * 1.5;
+                    margin-right: $size-sm / 2;
+                    stroke: #ff4757;
+                }
+
+                &.hidden {
+                    z-index: -1;
+                    opacity: 0;
+                    height: 0;
+                    display: none;
+                }
+            }
+        }
+
+        &__note {
+            &--input {
+                position: relative;
+            }
+
+            &--btns {
+                @include flexCenterize;
+                margin-bottom: $size-sm;
+                flex-wrap: wrap;
+
+                button {
+                    border: none;
+                    background-color: $color-main;
+                    color: $color-white;
+                    padding: $size-sm / 2 $size-sm;
+                    font-size: 1.4rem;
+                    border-radius: 5rem;
+                    cursor: pointer;
+                    @include transition(all);
+                    z-index: 2;
+
+                    &:not(:last-of-type) {
+                        margin-right: $size-sm;
+                    }
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    &:hover, 
+                    &:focus {
+                        background-color: $color-white;
+                        color: $color-main;
+                        @include layeredSmoothShadow;
+                    }
+                }
+            }
+
+            textarea {
+                resize: none;
+                width: 100%;
+                height: 15rem;
+
+                &:focus, &:active, &:valid {
+                    & + label {
+                        top: 5px;
+                        font-size: 1.2rem;
+                    }
+                }
+            }
+
+            label {
+                position: absolute;
+                left: 10px;
+                top: 10%;
+                font-size: 1.6rem;
+                @include transition(all);
+            }
+        }
+
+        &__time, &__category, &__priority {
+            button {
+                border: none;
+                background: none;
+                @include flexHorizontalCenterize;
+                padding: 0 $size-sm;
+                cursor: pointer;
+                @include transition(all);
+                font-size: 1.3rem;
+
+                &.hidden {
+                    display: none;
+                }
+
+                svg {
+                    width: $size-md;
+                    height: $size-md;
+                    margin-right: $size-sm;
+                    stroke: $color-main;
+                }
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:hover, 
+                &:focus {
+                    color: $color-main;
+                }
+            }
+
+            div {
+                width: 100%;
+                @include flexHorizontalCenterize;
+
+                &.hidden {
+                    display: none;
+                }
+
+                label, input[type="date"], select, button {
+                    height: 3.5rem;
+                }
+
+                label {
+                    width: 30%;
+                    background-color: $color-main;
+                    color: $color-white;
+                    padding: $size-sm / 2 $size-sm;
+                    font-size: 1.4rem;
+                    border-bottom-left-radius: 5rem;
+                    border-top-left-radius: 5rem;
+                    @include flexCenterize;
+                }
+
+                input[type="date"] {
+                    width: 70%;
+                    padding: $size-sm / 2 $size-sm;
+                }
+
+                input[type="date"], select {
+                    border: 1px solid $color-grey;
+
+                    &:focus {
+                        outline: none;
+                    }
+
+                    & + button {
+                        border-bottom-right-radius: 5rem;
+                        border-top-right-radius: 5rem;
+                        border: 1px solid $color-grey;
+                        border-left: none;
+                        padding: $size-sm / 3.25 $size-sm;
+
+                        svg {
+                            margin-right: $size-sm / 4;
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+                }
+
+                select {
+                    width: 70%;
+                    padding: 0 $size-sm;
+                }
+            }
+        }
+    }
+
+    &--task {
+        &__title {
+            font-size: 1.8rem;
+            text-align: center;
+            padding-bottom: $size-sm;
+            margin-bottom: $size-md;
+            border-bottom: 1px solid $color-darkgrey;
+            color: $color-main;
+        }
+
+        &__description {
+            font-size: 1.4rem;
+            margin-bottom: $size-md;
+        }
+
+        &__bar {
+            width: 100%;
+            @include flexHorizontalCenterize;
+            justify-content: space-between;
+
+            &--duetime, &--category {
+                text-align: center;
+                flex: 1;
+                background-color: $color-main;
+                color: #fff;
+                font-size: 1.2rem;
+                padding: $size-sm / 2 0;
+            }
+
+            &--duetime {
+                border-top-left-radius: 5rem;
+                border-bottom-left-radius: 5rem;
+            }
+
+            &--category {
+                border-top-right-radius: 5rem;
+                border-bottom-right-radius: 5rem;
+            }
+        }
+    }
+
+    #taskSubmitBtn {
+        width: 100%;
+        padding: $size-sm;
+        border: 1px solid $color-main;
+        border-radius: 5rem;
+        color: $color-main;
+        cursor: pointer;
+        background-color: #fff;
+        letter-spacing: .05em;
+        @include transition(all);
+        font-size: 1.6rem;
+
+        &:hover, &:focus {
+            outline: none;
+            color: #fff;
+            background-color: $color-main;
+            @include layeredSmoothShadow;
+        }
+    }
+}

@@ -1,0 +1,613 @@
+.container {
+    width: 100%;
+    max-width: 150rem;
+    margin: 0 auto;
+    min-height: calc(100vh - 65px);
+    display: grid;
+    grid-template-columns: 25% 75%;
+
+    @include respond(750px) {
+        grid-template-rows: -webkit-min-content auto;
+        grid-template-rows: min-content auto;
+        grid-template-columns: auto;
+    }
+}
+
+.side-panel {
+    background-color: $color-white;
+    border-right: 1px solid $color-grey;
+    padding: $size-lg 0 $size-lg $size-lg;
+
+    @include respond(900px) {
+        padding: $size-md 0 $size-md $size-sm;
+    }
+
+    @include respond(750px) {
+        padding: $size-md 0;
+        margin: 0 $size-sm;
+        border-right: none;
+        border-bottom: 1px solid $color-grey;
+    }
+ 
+    &--menu {
+        list-style-type: none;
+        padding-bottom: $size-md;
+        margin-bottom: $size-md;
+        border-bottom: 1px solid $color-grey;
+
+        &__item {
+            border-top-left-radius: 2.5rem;
+            border-bottom-left-radius: 2.5rem;
+            @include transition(all);
+
+            @include respond(750px) {
+                border-radius: 2.5rem;
+            }
+
+            &:hover,
+            &:focus,
+            &.active {
+                background-color: rgba($color-darkgrey, .15);
+            }
+
+            &:not(:last-of-type) {
+                margin-bottom: $size-sm;
+            }
+
+            &:nth-of-type(1) {
+                svg {
+                    stroke: #3498db;
+                }
+            }
+
+            &:nth-of-type(2) {
+                svg {
+                    stroke: #27ae60;
+                }
+            }
+
+            &:nth-of-type(3) {
+                svg {
+                    stroke: #16a085;
+                }
+            }
+
+            &:nth-of-type(4) {
+                svg {
+                    stroke: #7f8c8d;
+                }
+            }
+        }
+
+        &__btn {
+            padding: $size-sm / 2 $size-md;
+            border: none;
+            background: none;
+            font-size: 1.6rem;
+            @include flexHorizontalCenterize;
+            width: 100%;
+            cursor: pointer;
+
+            &.active {
+                font-weight: bold;
+
+                small {
+                    font-weight: normal;
+                }
+            }
+
+            small {
+                font-size: 1.2rem;
+                margin-left: auto;
+                color: $color-darkgrey;
+            }
+
+            svg {
+                width: $size-md;
+                height: $size-md;
+                margin-right: $size-sm;
+            }
+
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+
+    &--categories {
+        #categoryWrapper {
+            list-style-type: none;
+        }
+
+        &__addCategory {
+            #addCategoryBtn {
+                @include flexHorizontalCenterize;
+                padding: $size-sm / 2 $size-md;
+                border: none;
+                background: none;
+                width: 100%;
+                font-size: 1.4rem;
+                margin-top: $size-md;
+                @include transition(all);
+                cursor: pointer;
+                color: $color-darkgrey;
+
+                svg {
+                    width: $size-md;
+                    height: $size-md;
+                    margin-right: $size-sm * 1.15;
+                    stroke: $color-main;
+                    @include transition(all);
+                }
+
+                &:focus {
+                    outline: none;
+                }
+
+                &:focus,
+                &:hover {
+                    color: $color-main;
+
+                    svg {
+                        transform: rotate(90deg);
+                    }
+                }
+            }
+
+            & > div {
+                margin-top: $size-md;
+                padding-top: $size-md;
+                border-top: 1px solid $color-grey;
+                width: 100%;
+                @include flexHorizontalCenterize;
+                flex-direction: column;
+                @include transition(all);
+                opacity: 1;
+
+                &.hidden {
+                    z-index: -1;
+                    opacity: 0;
+                    display: none;
+                }
+
+                label, form {
+                    width: 75%;
+
+                    @include respond(750px) {
+                        width: 90%;
+                    }
+                }
+
+                label {
+                    background-color: $color-main;
+                    color: #fff;
+                    padding: $size-sm / 2 $size-sm;
+                    font-size: 1.4rem;
+                    border-top-left-radius: 1rem;
+                    border-top-right-radius: 1rem;
+                    @include flexCenterize;
+                    text-align: center;
+                }
+
+                form {
+                    border: 1px solid rgba($color-darkgrey, .75);
+                    border-top: none;
+                    @include flexHorizontalCenterize;
+
+                    input[type="text"] {
+                        width: 90%;
+                        padding: $size-sm / 2 $size-sm;
+                        border: none;
+                        font-family: inherit;
+                        height: $size-md;
+
+                        &:focus {
+                            outline: none;
+                        }
+                    }
+
+                    button {
+                        border: none;
+                        background: none;
+                        cursor: pointer;
+                        @include flexCenterize;
+                        width: 10%;
+                        height: $size-md;
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        svg {
+                            width: $size-sm * 1.25;
+                            height: $size-sm * 1.25;
+                            stroke: $color-main;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &--category {
+        border-top-left-radius: 2.5rem;
+        border-bottom-left-radius: 2.5rem;
+        @include transition(all);
+        @include flexHorizontalCenterize;
+
+        @include respond(750px) {
+            border-radius: 2.5rem;
+        }
+
+        &:not(:last-of-type) {
+            margin-bottom: $size-sm;
+        }
+
+        &:hover,
+        &:focus,
+        &.active {
+            background-color: rgba($color-darkgrey, .15);
+
+            .side-panel--category__del {
+                opacity: 1;
+            }
+        }
+
+        &.active {
+            .side-panel--category__title {
+                font-weight: bold;
+            }
+        }
+
+        &__title {
+            padding: $size-sm / 2 $size-md;
+            font-size: 1.6rem;
+            border: none;
+            background: none;
+            width: 100%;
+            @include flexHorizontalCenterize;
+            cursor: pointer;
+
+            &:focus {
+                outline: none;
+            }
+
+            span {
+                content: "";
+                width: $size-sm * 1.25;
+                height: $size-sm * 1.25;
+                border-radius: 50%;
+                background-color: $color-main;
+                display: inline-block;
+                margin-left: 5px;
+                margin-right: $size-sm * 1.5;
+            }
+        }
+
+        &__del {
+            border: none;
+            background: none;
+            cursor: pointer;
+            @include flexCenterize;
+            padding: 0 $size-sm;
+            opacity: 0;
+            @include transition(all);
+
+            svg {
+                width: $size-sm * 1.35;
+                height: $size-sm * 1.35;
+                stroke: $color-grey;
+            }
+
+            &:hover,
+            &:focus {
+                outline: none;
+
+                svg {
+                    stroke: $color-darkgrey;
+                }
+            }
+        }
+    }
+}
+
+.main-panel {
+    padding: $size-md $size-lg;
+
+    @include respond(900px) {
+        padding: $size-sm $size-md;
+    }
+
+    @include respond(750px) {
+        padding: $size-md $size-sm;
+    }
+
+    &--days {
+        h2 {
+            font-size: 2.4rem;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+            border-bottom: 1px solid $color-grey;
+            padding: 0 0 $size-sm * 0.75 $size-sm * 0.75;
+        }
+    }
+
+    &--tasks {
+        padding: $size-sm;
+
+        &__list {
+            list-style-type: none;
+        }
+
+        &__item {
+            @include flexHorizontalCenterize;
+            justify-content: space-between;
+            margin-bottom: $size-sm;
+            border-radius: 2.5rem;
+            @include transition(all);
+            padding: 0 $size-sm;
+            position: relative;
+
+            @include respond(500px) {
+                flex-direction: column;
+                align-items: flex-end;
+                padding: $size-sm $size-sm;
+            }
+
+            &:hover,
+            &:focus {
+                background-color: rgba($color-grey, .15);
+            }
+
+            &--title {
+                @include flexHorizontalCenterize;
+                width: 50%;
+
+                @include respond(600px) {
+                    width: 35%;
+                }
+
+                @include respond(500px) {
+                    width: 100%;
+                }
+
+                input[type="checkbox"] {
+                    display: none;
+
+                    &:checked {
+                        &+label {
+                            background-color: rgba($color-grey, .5);
+                            text-decoration: none !important;
+                        }
+
+                        &~label {
+                            text-decoration: line-through;
+                            color: $color-grey;
+                        }
+                    }
+                }
+
+                &+div {
+                    display: flex;
+                    align-items: center;
+
+                    @include respond(500px) {
+                        width: 100%;
+                        justify-content: flex-end;
+                        margin-top: $size-sm;
+                    }
+                }
+            }
+
+            &--circle,
+            &--text {
+                cursor: pointer;
+            }
+
+            &--circle,
+            &--text,
+            &--category {
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+                @include transition(all);
+            }
+
+            &--circle {
+                width: $size-md * 0.75;
+                height: $size-md * 0.75;
+                border: 2px solid;
+                border-radius: 50%;
+                padding: $size-sm * 0.75;
+            }
+
+            &--text {
+                font-size: 1.5rem;
+                flex: 1;
+                padding: $size-sm;
+            }
+
+            &--priority {
+                margin-right: $size-sm;
+            }
+
+            &--duetime,
+            &--priority {
+                font-weight: 300;
+                font-size: 1.2rem;
+                -webkit-user-select: none;
+                -moz-user-select: none;
+                -ms-user-select: none;
+                user-select: none;
+            }
+
+            &--info,
+            &--more {
+                width: $size-md / 1.15;
+                height: $size-md / 1.15;
+                border: none;
+                background: none;
+                cursor: pointer;
+                @include transition(all);
+
+                &:focus {
+                    outline: none;
+                }
+
+                svg {
+                    stroke: $color-darkgrey;
+                }
+
+                &:focus,
+                &:hover {
+                    svg {
+                        stroke: $color-main;
+                    }
+                }
+            }
+
+            &--info {
+                margin-right: $size-sm;
+            }
+
+            &--category {
+                font-size: 1.2rem;
+                text-align: right;
+                @include flexHorizontalCenterize;
+                margin: 0 $size-md;
+
+                span {
+                    &:nth-of-type(1) {
+                        width: $size-sm;
+                        height: $size-sm;
+                        border-radius: 50%;
+                        display: inline-block;
+                        margin-right: $size-sm / 2;
+                    }
+
+                    &:nth-of-type(2) {
+                        color: $color-darkgrey;
+                        font-weight: 300;
+                    }
+                }
+            }
+
+            &--dropdown {
+                @include flexHorizontalCenterize;
+
+                &:hover,
+                &:focus {
+                    & > .main-panel--tasks__item--dropdown__list {
+                        opacity: 1;
+                        z-index: 1;
+                    }
+                }
+
+
+                &__list {
+                    list-style-type: none;
+                    position: absolute;
+                    right: 0;
+                    top: 100%;
+                    background-color: $color-white;
+                    border-radius: 1rem;
+                    @include layeredSmoothShadow;
+                    @include transition(all);
+                    z-index: -1;
+                    opacity: 0;
+
+                    &::after {
+                        content: "";
+                        border-color: transparent transparent $color-white transparent;
+                        border-width: 0.75rem;
+                        border-style: solid;
+                        display: block;
+                        position: absolute;
+                        top: -1.5rem;
+                        right: 1.5rem;
+                    }
+                }
+
+                &__item {
+                    button {
+                        @include flexHorizontalCenterize;
+                        border: none;
+                        background: none;
+                        cursor: pointer;
+                        width: 100%;
+                        @include transition(all);
+                        font-size: 1.3rem;
+                        color: $color-darkgrey;
+                        padding: $size-sm $size-md;
+
+                        svg {
+                            width: $size-sm * 1.25;
+                            height: $size-sm * 1.25;
+                            margin-right: $size-sm / 2;
+                            @include transition(all);
+                            stroke: $color-darkgrey;
+                        }
+
+                        &:focus {
+                            outline: none;
+                        }
+
+                        &:focus,
+                        &:hover {
+                            color: $color-main;
+
+                            svg {
+                                stroke: $color-main;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &--add {
+        border: none;
+        background: none;
+        @include flexHorizontalCenterize;
+        margin-left: $size-sm;
+        cursor: pointer;
+        padding: $size-sm $size-sm $size-sm $size-sm * 0.8;
+        border-radius: 2.5rem;
+        @include transition(all);
+
+        &:focus {
+            outline: none;
+        }
+
+        &:focus,
+        &:hover {
+            small {
+                color: $color-main;
+            }
+
+            svg {
+                transform: rotate(90deg);
+            }
+        }
+
+        small,
+        svg {
+            @include transition(all);
+        }
+
+        small {
+            display: inline-block;
+            font-size: 1.4rem;
+            margin-left: $size-sm * 0.75;
+            color: $color-darkgrey;
+        }
+
+        svg {
+            width: $size-md;
+            height: $size-md;
+            stroke: $color-main;
+        }
+    }
+}
